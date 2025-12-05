@@ -1,0 +1,12 @@
+# Build assets 
+**/bin/ 
+**/obj/
+
+# Bash and batch :) 
+run.*
+# Log file 
+*.log 
+# IDE assets 
+.vscode/
+.idea/ 
+.vs/
