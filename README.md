@@ -2,8 +2,8 @@
 **.NET Console Application project** created to test things I can do with `C# Enum`
 
 ## Setup environment
-Please install `.Net Core SDK 10.0` on Microsoft official Download page 👌
-Use `Visual Studio 2022+` or `Visual Studio Code` with `C# Dev Kit extension` installed to open and start project.
+- Please install `.Net Core SDK 10.0` on Microsoft official Download page 👌
+- Use `Visual Studio 2022+` or `Visual Studio Code` with `C# Dev Kit extension` installed to open and start project.
 
 ## Build and run Project 
 - **(recommended):** Use **Debug/Run** feature of `Visual Studio 2022+` or `Visual Studio Code`
