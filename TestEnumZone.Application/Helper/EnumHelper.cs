@@ -25,11 +25,12 @@ namespace TestEnumZone.Application.Helper
 
             return value.ToString();
         }
-        public static string GetEnumValueString<TEnum>(TEnum? value)
+        public static string GetEnumString<TEnum>(TEnum? value)
             where TEnum : struct, Enum
         {
             if (value == null)
             {
+                Console.WriteLine("EnumHelper.GetEnumValueString Invalid params!");
                 return string.Empty;
             }
 
@@ -41,6 +42,7 @@ namespace TestEnumZone.Application.Helper
         {
             if (value == null)
             {
+                Console.WriteLine("EnumHelper.GetEnumValueInt Invalid params!");
                 return -1; // Return Negative value for invalid case 
             }
             int raw = Convert.ToInt32(value.Value);

@@ -78,10 +78,10 @@ namespace TestEnumZone.Tests
             Status? value = Status.Done;
 
             // Act
-            var result = EnumHelper.GetEnumValueString(value);
+            var result = EnumHelper.GetEnumString(value);
 
             // Assert
-            Assert.AreEqual("100", result);
+            Assert.AreEqual("Done", result);
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace TestEnumZone.Tests
             Status? value = null;
 
             // Act
-            var result = EnumHelper.GetEnumValueString(value);
+            var result = EnumHelper.GetEnumString(value);
 
             // Assert
             Assert.AreEqual(string.Empty, result);

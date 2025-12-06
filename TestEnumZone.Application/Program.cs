@@ -10,7 +10,7 @@ namespace TestEnumZone.Application
             Console.WriteLine("Enum 'SortBy.FirstName' info:");
             /* Run:) */
             string desc = EnumHelper.GetEnumDescription(SortBy.FirstName);
-            string valueString = EnumHelper.GetEnumValueString<SortBy>(SortBy.FirstName);
+            string valueString = EnumHelper.GetEnumString<SortBy>(SortBy.FirstName);
             int valueInt = EnumHelper.GetEnumValueInt<SortBy>(SortBy.FirstName);
             /* Print result */
             Console.WriteLine("Description   : {0}", desc);
