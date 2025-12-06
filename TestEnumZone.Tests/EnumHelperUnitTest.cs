@@ -28,7 +28,7 @@ namespace TestEnumZone.Tests
     public class EnumHelperUnitTest
     {
         // ---------- GetEnumName ----------
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumName_ReturnsName_WhenValid()
         {
             // Arrange
@@ -42,7 +42,7 @@ namespace TestEnumZone.Tests
         }
         // ---------- GetEnumDescription ----------
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumDescription_ReturnsDescriptionAttribute_WhenPresent()
         {
             // Arrange
@@ -55,7 +55,7 @@ namespace TestEnumZone.Tests
             Assert.AreEqual("Processing", result);
         }
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumDescription_ReturnsBlankString_WhenNoDescription()
         {
             // Arrange
@@ -69,7 +69,7 @@ namespace TestEnumZone.Tests
             Assert.AreEqual(string.Empty, result);
         }
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumDescription_Null_ReturnsEmptyString()
         {
             // Arrange
@@ -84,7 +84,7 @@ namespace TestEnumZone.Tests
 
         // ---------- GetEnumValueString<TEnum> ----------
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumValueString_ReturnsName_WhenValid()
         {
             // Arrange
@@ -97,7 +97,7 @@ namespace TestEnumZone.Tests
             Assert.AreEqual("Done", result);
         }
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumValueString_ReturnsNumericValue_WhenValid()
         {
             // Arrange
@@ -110,7 +110,7 @@ namespace TestEnumZone.Tests
             Assert.AreEqual("100", result);
         }
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumValueString_ReturnsNumericValue_Zero()
         {
             // Arrange
@@ -123,7 +123,7 @@ namespace TestEnumZone.Tests
             Assert.AreEqual("0", result);
         }
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumValueString_ReturnsNumericValue_LongEnum()
         {
             // Arrange
@@ -136,7 +136,7 @@ namespace TestEnumZone.Tests
             Assert.AreEqual(((long)BigStatus.VeryLarge).ToString(), result);
         }
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumValueString_ReturnsNumericValue_NegativeLongEnum()
         {
             // Arrange
@@ -149,7 +149,7 @@ namespace TestEnumZone.Tests
             Assert.AreEqual(((long)BigStatus.VeryNegative).ToString(), result);
         }
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumValueString_Null_ReturnsEmptyString_Value()
         {
             // Arrange
@@ -162,7 +162,7 @@ namespace TestEnumZone.Tests
             Assert.AreEqual(string.Empty, result);
         }
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumValueInt_ReturnsUnderlyingInt_WhenWithinRange()
         {
             // Arrange
@@ -175,7 +175,7 @@ namespace TestEnumZone.Tests
             Assert.AreEqual(10, result);
         }
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumValueInt_Null_ReturnsNegativeOne()
         {
             // Arrange
@@ -188,7 +188,7 @@ namespace TestEnumZone.Tests
             Assert.AreEqual(-1, result);
         }
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumValueInt_NotThrowsOverflowException_WhenValueExceedsIntRange_Positive()
         {
             // Arrange
@@ -198,7 +198,7 @@ namespace TestEnumZone.Tests
             Assert.DoesNotThrow(() => EnumHelper.GetEnumValueInt(value));
         }
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumValueInt_NotThrowsOverflowException_WhenValueExceedsIntRange_Negative()
         {
             // Arrange
@@ -208,7 +208,7 @@ namespace TestEnumZone.Tests
             Assert.DoesNotThrow(() => EnumHelper.GetEnumValueInt(value));
         }
 
-        [Test]
+        [Test, Timeout(TestConstants.TIMEOUT_BEST)]
         public void GetEnumValueInt_WorksForLongEnum_WhenWithinIntRange()
         {
             // Arrange
