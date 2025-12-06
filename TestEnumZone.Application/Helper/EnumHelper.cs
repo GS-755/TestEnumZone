@@ -65,13 +65,14 @@ namespace TestEnumZone.Application.Helper
             }
             try
             {
-                int raw = Convert.ToInt32(value.Value);
+                long raw = Convert.ToInt64(value.Value);
                 if (raw < int.MinValue || raw > int.MaxValue)
                 {
                     Console.Error.WriteLine("GetEnumDescription.GetEnumInt Passed enum exceeds int range! - Enum: {0}, value {1} ", value, value.Value);
+                    return GlobalConstants.ENUM_FATAL;
                 }
 
-                return raw;
+                return (int)raw;
             }
             catch (Exception ex)
             {
