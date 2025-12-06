@@ -28,7 +28,7 @@ namespace TestEnumZone.Application.Helper
                 return attributes[0].Description;
             }
 
-            return value.ToString();
+            return string.Empty;
         }
         /// <summary>
         /// Function to get <c>Enum name</c> with datatype: <c>string</c>
@@ -36,7 +36,7 @@ namespace TestEnumZone.Application.Helper
         /// <typeparam name="TEnum"></typeparam>
         /// <param name="value"></param>
         /// <returns>Enum name string</returns>
-        public static string GetEnumString<TEnum>(TEnum? value)
+        public static string GetEnumName<TEnum>(TEnum? value)
             where TEnum : struct, Enum
         {
             if (value == null)
@@ -47,6 +47,34 @@ namespace TestEnumZone.Application.Helper
 
             return value.ToString() ?? string.Empty;
         }
+
+        /// <summary>
+        /// Function to get <c>Enum value</c> as <c>string</c> without returning the enum name.
+        /// Example: for an enum member whose numeric value is 1 this returns "1".
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <param name="value"></param>
+        /// <returns>Underlying enum value as string, or empty string on error</returns>
+        public static string GetEnumValueString<TEnum>(TEnum? value)
+            where TEnum : struct, Enum
+        {
+            if (value == null)
+            {
+                Console.Error.WriteLine("EnumHelper.GetEnumValueString Invalid params!");
+                return string.Empty;
+            }
+            try
+            {
+                return Convert.ChangeType(value.Value, Enum.GetUnderlyingType(typeof(TEnum))).ToString() ?? string.Empty;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine("EnumHelper.GetEnumValueString Unhandled exception: - Enum: {0}", value);
+                Console.Error.WriteLine(ex);
+                return string.Empty;
+            }
+        }
+
         /// <summary>
         /// Function to get <c>Enum value</c> with datatype: <c>int</c>
         /// <para></para>
@@ -60,25 +88,40 @@ namespace TestEnumZone.Application.Helper
         {
             if (value == null)
             {
-                Console.WriteLine("EnumHelper.GetEnumValueInt Invalid params!");
-                return GlobalConstants.ENUM_FATAL; // Return Negative value for invalid case 
+                Console.Error.WriteLine("EnumHelper.GetEnumValueInt Invalid params!");
+                return GlobalConstants.ENUM_FATAL;
             }
             try
             {
-                long raw = Convert.ToInt64(value.Value);
-                if (raw < int.MinValue || raw > int.MaxValue)
+                // Determine underlying integral type to preserve signed/unsigned representation
+                Type underlying = Enum.GetUnderlyingType(typeof(TEnum));
+                switch (Type.GetTypeCode(underlying))
                 {
-                    Console.Error.WriteLine("GetEnumDescription.GetEnumInt Passed enum exceeds int range! - Enum: {0}, value {1} ", value, value.Value);
-                    return GlobalConstants.ENUM_FATAL;
+                    case TypeCode.SByte:
+                    case TypeCode.Int16:
+                    case TypeCode.Int32:
+                    case TypeCode.Int64:
+                    {
+                        return (int)Convert.ToInt64(value.Value);
+                    }
+                    case TypeCode.Byte:
+                    case TypeCode.UInt16:
+                    case TypeCode.UInt32:
+                    case TypeCode.UInt64:
+                    {
+                        return (int)Convert.ToUInt64(value.Value);
+                    }
+                    default:
+                    {
+                        // Fallback to unsigned 64-bit representation
+                        return (int)Convert.ToUInt64(value.Value);
+                    }
                 }
-
-                return (int)raw;
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine("GetEnumDescription.GetEnumInt Unhandled exception: - Enum: {0}", value);
+                Console.Error.WriteLine("EnumHelper.GetEnumValueInt Unhandled exception: - Enum: {0}", value);
                 Console.Error.WriteLine(ex);
-
                 return GlobalConstants.ENUM_FATAL;
             }
         }

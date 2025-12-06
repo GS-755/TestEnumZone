@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using TestEnumZone.Application.Helper;
-using static TestEnumZone.Application.GlobalConstants;
 
 namespace TestEnumZone.Tests
 {
@@ -28,6 +27,19 @@ namespace TestEnumZone.Tests
     [TestFixture]
     public class EnumHelperUnitTest
     {
+        // ---------- GetEnumName ----------
+        [Test]
+        public void GetEnumName_ReturnsName_WhenValid()
+        {
+            // Arrange
+            Status? value = Status.Done;
+
+            // Act
+            var result = EnumHelper.GetEnumName<Status>(value);
+
+            // Assert
+            Assert.AreEqual("Done", result);
+        }
         // ---------- GetEnumDescription ----------
 
         [Test]
@@ -44,7 +56,7 @@ namespace TestEnumZone.Tests
         }
 
         [Test]
-        public void GetEnumDescription_ReturnsEnumName_WhenNoDescription()
+        public void GetEnumDescription_ReturnsBlankString_WhenNoDescription()
         {
             // Arrange
             // Define an enum without DescriptionAttribute
@@ -54,7 +66,7 @@ namespace TestEnumZone.Tests
             var result = EnumHelper.GetEnumDescription(value);
 
             // Assert
-            Assert.AreEqual("Red", result);
+            Assert.AreEqual(string.Empty, result);
         }
 
         [Test]
@@ -79,26 +91,76 @@ namespace TestEnumZone.Tests
             Status? value = Status.Done;
 
             // Act
-            var result = EnumHelper.GetEnumString(value);
+            var result = EnumHelper.GetEnumName(value);
 
             // Assert
             Assert.AreEqual("Done", result);
         }
 
         [Test]
-        public void GetEnumValueString_Null_ReturnsEmptyString()
+        public void GetEnumValueString_ReturnsNumericValue_WhenValid()
+        {
+            // Arrange
+            Status? value = Status.Done;
+
+            // Act
+            var result = EnumHelper.GetEnumValueString(value);
+
+            // Assert
+            Assert.AreEqual("100", result);
+        }
+
+        [Test]
+        public void GetEnumValueString_ReturnsNumericValue_Zero()
+        {
+            // Arrange
+            Status? value = Status.Init;
+
+            // Act
+            var result = EnumHelper.GetEnumValueString(value);
+
+            // Assert
+            Assert.AreEqual("0", result);
+        }
+
+        [Test]
+        public void GetEnumValueString_ReturnsNumericValue_LongEnum()
+        {
+            // Arrange
+            BigStatus? value = BigStatus.VeryLarge;
+
+            // Act
+            var result = EnumHelper.GetEnumValueString(value);
+
+            // Assert
+            Assert.AreEqual(((long)BigStatus.VeryLarge).ToString(), result);
+        }
+
+        [Test]
+        public void GetEnumValueString_ReturnsNumericValue_NegativeLongEnum()
+        {
+            // Arrange
+            BigStatus? value = BigStatus.VeryNegative;
+
+            // Act
+            var result = EnumHelper.GetEnumValueString(value);
+
+            // Assert
+            Assert.AreEqual(((long)BigStatus.VeryNegative).ToString(), result);
+        }
+
+        [Test]
+        public void GetEnumValueString_Null_ReturnsEmptyString_Value()
         {
             // Arrange
             Status? value = null;
 
             // Act
-            var result = EnumHelper.GetEnumString(value);
+            var result = EnumHelper.GetEnumValueString(value);
 
             // Assert
             Assert.AreEqual(string.Empty, result);
         }
-
-        // ---------- GetEnumValueInt<TEnum> ----------
 
         [Test]
         public void GetEnumValueInt_ReturnsUnderlyingInt_WhenWithinRange()
@@ -158,5 +220,6 @@ namespace TestEnumZone.Tests
             // Assert
             Assert.AreEqual(42, result);
         }
+
     }
 }

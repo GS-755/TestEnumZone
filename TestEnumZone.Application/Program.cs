@@ -9,13 +9,15 @@ namespace TestEnumZone.Application
         {
             Console.WriteLine("Enum 'SortBy.FirstName' info:");
             /* Run:) */
+            string name = EnumHelper.GetEnumName<SortBy>(SortBy.FirstName);
             string desc = EnumHelper.GetEnumDescription(SortBy.FirstName);
-            string valueString = EnumHelper.GetEnumString<SortBy>(SortBy.FirstName);
+            string valueString = EnumHelper.GetEnumValueString<SortBy>(SortBy.FirstName);
             int valueInt = EnumHelper.GetEnumValueInt<SortBy>(SortBy.FirstName);
             /* Print result */
-            Console.WriteLine("Description   : {0}", desc);
+            Console.WriteLine("Name: {0}", name);
+            Console.WriteLine("Description: {0}", desc);
             Console.WriteLine("Value (String): {0}", valueString);
-            Console.WriteLine("Value (Int32) : {0}", valueInt);
+            Console.WriteLine("Value (Int32): {0}", valueInt);
         }
     }
 }
