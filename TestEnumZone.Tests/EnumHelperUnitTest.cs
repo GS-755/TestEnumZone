@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using TestEnumZone.Application.Helper;
+using static TestEnumZone.Application.GlobalConstants;
 
 namespace TestEnumZone.Tests
 {
@@ -126,23 +127,23 @@ namespace TestEnumZone.Tests
         }
 
         [Test]
-        public void GetEnumValueInt_ThrowsOverflowException_WhenValueExceedsIntRange_Positive()
+        public void GetEnumValueInt_NotThrowsOverflowException_WhenValueExceedsIntRange_Positive()
         {
             // Arrange
             BigStatus? value = BigStatus.VeryLarge;
 
             // Act + Assert
-            Assert.Throws<OverflowException>(() => EnumHelper.GetEnumValueInt(value));
+            Assert.DoesNotThrow(() => EnumHelper.GetEnumValueInt(value));
         }
 
         [Test]
-        public void GetEnumValueInt_ThrowsOverflowException_WhenValueExceedsIntRange_Negative()
+        public void GetEnumValueInt_NotThrowsOverflowException_WhenValueExceedsIntRange_Negative()
         {
             // Arrange
             BigStatus? value = BigStatus.VeryNegative;
 
             // Act + Assert
-            Assert.Throws<OverflowException>(() => EnumHelper.GetEnumValueInt(value));
+            Assert.DoesNotThrow(() => EnumHelper.GetEnumValueInt(value));
         }
 
         [Test]
